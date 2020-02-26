@@ -16,7 +16,7 @@ int main(int argc, char *argv)
 
   a = 'A';
   b = 0xd3c0d3; //13877459 desimal
-  strcpy(c, "testing");
+  gets(&c);
 
   print(a, b, c);
 
