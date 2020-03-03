@@ -1,0 +1,16 @@
+from pwn import *
+
+r = remote('103.200.7.156', 3101)
+r.recvuntil('Input: ')
+r.sendline('1')
+r.recvuntil(': ')
+r.sendline('CAESAR CIPHER IZ DA BEZZT YOOO')
+r.recvuntil(': ')
+r.sendline('3')
+r.recvuntil(': ')
+r.sendline('VIGENERE IS EASYY ASF BRUH')
+r.recvuntil(': ')
+r.sendline('2')
+r.recvuntil(': ')
+r.sendline('EAZY EAZY SUB-SUB-SUBSTITUTION')
+print r.recv()
