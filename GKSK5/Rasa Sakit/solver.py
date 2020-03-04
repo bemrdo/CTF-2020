@@ -32,5 +32,4 @@ print q
 phi = (p-1) * (q-1)
 d = inverse(e,phi)
 dec = pow(c, d, n)
-print numtoASCII(dec)
-print long_to_bytes(dec)
+print (dec)
