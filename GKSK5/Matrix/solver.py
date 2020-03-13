@@ -1,7 +1,10 @@
+import sys
 from base64 import *
+from numpy.linalg import inv
+# -*- coding: utf-8 -*-
 
 def textToMatrix(text):
-    cipher = b64decode(text)
+    text = b64decode(text).decode('utf-8')
     text = text.strip()
     text = list(text)
     matrix = []
@@ -27,19 +30,47 @@ def matrixToText(matrix):
         cipher += ''.join(matrix[i])
     return cipher
 
-def decrypt(cipher, key):
-    for x in range(len(cipher)):
+def decrypt(plaintext,key):
+    ciphertext = []
+    for x in range(len(plaintext)):
         row = []
         for y in range(len(key[0])):
+            total = 0
             for z in range(len(key)):
-                total1 = 1 
+                total = total + (plaintext[x][z] * key[z][y])
+            row.append(total)
+        ciphertext.append(row)
+    return ciphertext
+
+def invKey(key):
+    newkey = []
+    counter = 0
+    for i in range(2):
+        temp = []
+        for j in range(2):
+            temp.append(ord(key[counter]))
+            counter += 1
+        newkey.append(temp)
+    invkey = inv(newkey)
+    return invkey
+
+def matrixToText(matrix):
+    plaintext = ''
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            matrix[i][j] = chr(int(round(matrix[i][j])))
+        plaintext += ''.join(matrix[i])
+    return(plaintext)
 
 def main():
     cipher = open('flag', 'rb').read()
     cipher = textToMatrix(cipher)
-    key = 'GKSK'
-    print cipher[0]
+    key = "ASDF"
+    newkey = invKey(key)
+    plaintext = decrypt(cipher, newkey)
+    #print (cipher)
+    print (matrixToText(plaintext))
+    #key = [[4.083, 0.833], [-3.172, 0.704]]
 
 if __name__ == "__main__":
     main()
-

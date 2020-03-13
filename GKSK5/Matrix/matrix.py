@@ -50,6 +50,7 @@ def matrixToText(matrix):
         for j in range(len(matrix[0])):
             matrix[i][j] = chr(matrix[i][j])
         cipher += ''.join(matrix[i])
+        print (cipher)
     return base64.b64encode(str.encode(cipher)).decode('utf-8')
 
 def encrypt(plaintext,key):
@@ -72,7 +73,9 @@ def main():
     plaintext = textToMatrix(plaintext)
     keyMatrix = keyCheck(key)
     ciphertext = encrypt(plaintext,keyMatrix)
+    print (ciphertext)
     ciphertext = matrixToText(ciphertext)
+    print(base64.b64decode(ciphertext).decode('utf-8'))
     print("ciphertext:", ciphertext)
 
 if __name__ == "__main__":
