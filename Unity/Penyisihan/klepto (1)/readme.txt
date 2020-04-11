@@ -1,0 +1,1 @@
+Use id_rsa password for rar password and encryption key
